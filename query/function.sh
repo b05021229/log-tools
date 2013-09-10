@@ -1,6 +1,22 @@
 #/bin/sh
 #fireice
 #query info main
+
+
+#Write log
+#$1 message
+Log()
+{
+  if [ ! -f abc.log ]; then
+  datenow=`date +%Y%m%d%H%M`
+  echo -n "$datenow">> abc.log
+  echo "$1">> abc.log
+  else
+  echo "">abc.log
+  fi
+}
+
+
 #Query customer/Subscriber/Account Info
 BuildSQL()
 {
@@ -24,3 +40,13 @@ QueryCBE_SUBSCRIBER()
   }
 QueryCBE_SUBSCRIBER MAINPRODUCTKEY 1000
 
+#unload function
+#$1 unlod ouput filename
+#$2 unload SQL 
+UnloadSQL()
+{
+    #mdsql - unload to "$1" $2
+    Log EnterFunction UnloadSQL
+}
+
+UnloadSQL A.unl select 
